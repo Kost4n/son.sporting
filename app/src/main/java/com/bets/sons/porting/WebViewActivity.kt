@@ -9,11 +9,14 @@ import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
+import android.webkit.PermissionRequest
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -26,17 +29,14 @@ class WebViewActivity: AppCompatActivity() {
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
     private var mCameraPhotoPath: String? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        val link = intent.extras?.getString("link")
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.actiity_webview)
-
-        val link = intent.extras?.getString("url")
         web = findViewById(R.id.web_view)
-
+        requestPermissions(arrayOf(android.Manifest.permission.CAMERA), 101)
         web.webViewClient = WebViewClient()
         web.webChromeClient = ChromeClient()
         val webSettings = web.settings
@@ -47,7 +47,7 @@ class WebViewActivity: AppCompatActivity() {
             domStorageEnabled = true
             databaseEnabled = true
             setSupportZoom(true)
-            allowFileAccess = true
+            allowFileAccess = false
             allowContentAccess = true
         }
         if (savedInstanceState != null) {
@@ -92,6 +92,12 @@ class WebViewActivity: AppCompatActivity() {
 
     inner class ChromeClient : WebChromeClient() {
         // For Android 5.0
+
+        override fun onPermissionRequest(request: PermissionRequest?) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                request?.grant(request.resources)
+            }
+        }
         override fun onShowFileChooser(
             view: WebView,
             filePath: ValueCallback<Array<Uri>>,

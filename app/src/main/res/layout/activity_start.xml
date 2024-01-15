@@ -38,21 +38,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="48sp"
+        android:textSize="36sp"
         android:textColor="@color/white"
         android:text="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="80dp"/>
-<!--    <ImageView-->
-<!--        android:id="@+id/anim_counter"-->
-<!--        android:layout_width="160dp"-->
-<!--        android:layout_height="160dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        android:src="@drawable/fall_obj2"-->
-<!--        android:layout_marginBottom="40dp"-->
-<!--        android:layout_marginEnd="30dp"/>-->
-
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="90dp"/>
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_circular"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="40dp"
+        app:trackColor="@color/white"
+        app:indicatorColor="@color/gray"
+        app:trackCornerRadius="10dp"
+        app:indicatorSize="140dp"
+        app:trackThickness="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

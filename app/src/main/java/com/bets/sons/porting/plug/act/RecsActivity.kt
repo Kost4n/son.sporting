@@ -1,5 +1,6 @@
 package com.bets.sons.porting.plug.act
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -52,5 +53,10 @@ class RecsActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, StartActivity::class.java))
     }
 }

@@ -11,6 +11,6 @@ interface RecDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addRec(rec: Rec)
 
-    @Query("SELECT * FROM recs ORDER BY id DESC LIMIT 5")
+    @Query("SELECT * FROM recs ORDER BY score DESC LIMIT 5")
     fun getRecs(): Flow<List<Rec>>
 }
